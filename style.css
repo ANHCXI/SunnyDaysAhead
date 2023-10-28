@@ -61,7 +61,11 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 576px) {
     main {
         display: flex;
-    }};
+    }
+    .container {
+        flex-direction: column;
+    }
+};
