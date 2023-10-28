@@ -10,3 +10,5 @@ Some are still being implemented, but they are as follows:
 3. Create a function that accepts two or more input parameters and returns a value that is calculated or determined by the inputs.  Basic math functions don’t count (e.g. addition, etc).
 4. Retrieve data from a third-party API and use it to display something within your app.
 5. Create a node.js web server using a modern framework such as Express.js or Fastify.  Serve at least one route that your app uses (must serve more than just the index.html file).
+
+#### In order to run, open srcServer, rightclick and hit Run Code.
