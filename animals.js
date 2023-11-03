@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Token request failed with status: ' + response.status);
+                throw Error('Token request failed with status: ' + response.status);
             }
         })
         .then(function (tokenData) {
@@ -30,7 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function searchWithAccessToken(accessToken) {
-        function searchButtonClick() {
+        function searchButtonClick(event) {
+            event.preventDefault();
+
             var name = document.getElementById('name').value;
             var age = document.getElementById('age').value;
             var gender = document.getElementById('gender').value;
@@ -77,12 +79,83 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .then(function (data) {
+                    
+                    var animalsWithPhotos = data.animals.filter(function (animal) {
+                        return animal.photos.length > 0;
+                    });
 
-                    console.log(data);
+                    
+                    shuffleArray(animalsWithPhotos);
+
+                    
+                    for (var i = 0; i < 3; i++) {
+                        if (i < animalsWithPhotos.length) {
+                            var animalData = animalsWithPhotos[i];
+                            updateAnimalImage('animal' + (i + 1) + 'Img', animalData.photos[0].small);
+                            updateAnimalText('animal' + (i + 1), animalData);
+                            updateAnimalCompatibility('animal' + (i + 1), animalData);
+                        } else {
+                            clearAnimalContent('animal' + (i + 1));
+                        }
+                    }
                 })
                 .catch(function (error) {
                     console.error('An error occurred:', error);
                 });
+        }
+
+        function updateAnimalImage(elementId, imageUrl) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.src = imageUrl;
+            }
+        }
+
+        function updateAnimalText(animalNumber, animalData) {
+            updateElementText(animalNumber + 'Name', animalData.name);
+            updateElementText(animalNumber + 'Age', animalData.age);
+            updateElementText(animalNumber + 'Gender', animalData.gender);
+            updateElementText(animalNumber + 'Breed', animalData.breeds.primary);
+            updateElementText(animalNumber + 'Organization', animalData.organization_id);
+        }
+
+        function updateElementText(elementId, value) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = value;
+            }
+        }
+
+        function updateAnimalCompatibility(animalNumber, animalData) {
+            updateCompatibilityIcon(animalNumber + 'gwd', animalData.good_with_dogs);
+            updateCompatibilityIcon(animalNumber + 'gwc', animalData.good_with_cats);
+        }
+
+        function updateCompatibilityIcon(elementId, isCompatible) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = isCompatible ? '✓' : '✗';
+            }
+        }
+
+        function clearAnimalContent(animalNumber) {
+            updateAnimalImage(animalNumber + 'Img', '');
+            updateAnimalText(animalNumber, {
+                name: '',
+                age: '',
+                gender: '',
+                breeds: { primary: '' },
+                organization_id: ''
+            });
+        }
+
+        function shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
         }
 
         var searchButton = document.getElementById('searchButton');
