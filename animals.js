@@ -13,20 +13,20 @@ document.addEventListener('DOMContentLoaded', function () {
             method: 'POST',
             body: tokenData,
         })
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw Error('Token request failed with status: ' + response.status);
-            }
-        })
-        .then(function (tokenData) {
-            var accessToken = tokenData.access_token;
-            searchWithAccessToken(accessToken);
-        })
-        .catch(function (error) {
-            console.error('Error obtaining access token:', error);
-        });
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw Error('Token request failed with status: ' + response.status);
+                }
+            })
+            .then(function (tokenData) {
+                var accessToken = tokenData.access_token;
+                searchWithAccessToken(accessToken);
+            })
+            .catch(function (error) {
+                console.error('Error obtaining access token:', error);
+            });
     }
 
     function searchWithAccessToken(accessToken) {
@@ -44,11 +44,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
+            var alphanumericRegex = /^[a-zA-Z0-9\s]+$/;
+
+            if (name && !alphanumericRegex.test(name)) {
+                alert('Please enter a valid name with only letters and numbers.');
+                return;
+            }
+
+            if (organization && !alphanumericRegex.test(organization)) {
+                alert('Please enter a valid organization name with only letters and numbers.');
+                return;
+            }
+
             var apiUrl = 'https://api.petfinder.com/v2/animals?';
             var queryParameters = [];
 
             if (name) {
-                queryParameters.push('name=' + name);
+                queryParameters.push('name=' + encodeURIComponent(name));
             }
             if (age) {
                 queryParameters.push('age=' + age);
@@ -60,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 queryParameters.push('breed=' + breed);
             }
             if (organization) {
-                queryParameters.push('organization=' + organization);
+                queryParameters.push('organization=' + encodeURIComponent(organization));
             }
 
             apiUrl += queryParameters.join('&');
@@ -92,9 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     for (var i = 0; i < 3; i++) {
                         if (i < animalsWithPhotos.length) {
                             var animalData = animalsWithPhotos[i];
-                            updateAnimalImage('animal' + (i + 1) + 'Img', animalData.photos[0].small);
-                            updateAnimalText('animal' + (i + 1), animalData);
-                            updateAnimalCompatibility('animal' + (i + 1), animalData);
+                            updateAnimalDetails('animal' + (i + 1), animalData, accessToken);
                         } else {
                             clearAnimalContent('animal' + (i + 1));
                         }
@@ -102,6 +112,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 })
                 .catch(function (error) {
                     console.error('An error occurred:', error);
+                });
+        }
+
+        function updateAnimalDetails(animalNumber, animalData, accessToken) {
+            getOrganizationName(animalData.organization_id, accessToken)
+                .then(function (organizationName) {
+                    animalData.organization_name = organizationName;
+                    updateAnimalImage(animalNumber + 'Img', animalData.photos[0].small);
+                    updateAnimalText(animalNumber, animalData);
+                    updateAnimalCompatibility(animalNumber, animalData);
+                })
+                .catch(function (error) {
+                    console.error('Error getting organization name:', error);
+                });
+        }
+
+        function getOrganizationName(organizationId, accessToken) {
+            var organizationUrl = 'https://api.petfinder.com/v2/organizations/' + organizationId;
+
+            var headers = new Headers({
+                'Authorization': 'Bearer ' + accessToken
+            });
+
+            var request = new Request(organizationUrl, {
+                method: 'GET',
+                headers: headers
+            });
+
+            return fetch(request)
+                .then(function (response) {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Request failed with status: ' + response.status);
+                    }
+                })
+                .then(function (data) {
+                    return data.organization ? data.organization.name : 'Unknown Organization';
                 });
         }
 
@@ -117,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updateElementText(animalNumber + 'Age', animalData.age);
             updateElementText(animalNumber + 'Gender', animalData.gender);
             updateElementText(animalNumber + 'Breed', animalData.breeds.primary);
-            updateElementText(animalNumber + 'Organization', animalData.organization_id);
+            updateElementText(animalNumber + 'Organization', animalData.organization_name);
         }
 
         function updateElementText(elementId, value) {
