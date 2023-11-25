@@ -37,8 +37,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var age = document.getElementById('age').value;
             var gender = document.getElementById('gender').value;
             var breed = document.getElementById('breed').value;
+            var organization = document.getElementById('organization').value;
 
-            if (!name && !age && !gender && !breed) {
+            if (!name && !age && !gender && !breed && !organization) {
                 alert('Please fill in at least one field for your search.');
                 return;
             }
@@ -57,6 +58,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             if (breed) {
                 queryParameters.push('breed=' + breed);
+            }
+            if (organization) {
+                queryParameters.push('organization=' + organization);
             }
 
             apiUrl += queryParameters.join('&');
@@ -79,15 +83,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 })
                 .then(function (data) {
-                    
                     var animalsWithPhotos = data.animals.filter(function (animal) {
                         return animal.photos.length > 0;
                     });
 
-                    
                     shuffleArray(animalsWithPhotos);
 
-                    
                     for (var i = 0; i < 3; i++) {
                         if (i < animalsWithPhotos.length) {
                             var animalData = animalsWithPhotos[i];
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function updateAnimalText(animalNumber, animalData) {
-            updateElementText(animalNumber + 'Name', animalData.name);
+            updateElementHTML(animalNumber + 'Name', '<a href="' + animalData.url + '" target="_blank">' + animalData.name + '</a>');
             updateElementText(animalNumber + 'Age', animalData.age);
             updateElementText(animalNumber + 'Gender', animalData.gender);
             updateElementText(animalNumber + 'Breed', animalData.breeds.primary);
@@ -126,13 +127,20 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
+        function updateElementHTML(elementId, value) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = value;
+            }
+        }
+
         function updateAnimalCompatibility(animalNumber, animalData) {
             updateCompatibilityIcon(animalNumber + 'gwd', animalData.good_with_dogs);
             updateCompatibilityIcon(animalNumber + 'gwc', animalData.good_with_cats);
         }
 
-        function updateCompatibilityIcon(elementId, isCompatible) {
-            var element = document.getElementById(elementId);
+        function updateCompatibilityIcon(animalData, isCompatible) {
+            var element = document.getElementById(animalData);
             if (element) {
                 element.textContent = isCompatible ? '✓' : '✗';
             }
@@ -145,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 age: '',
                 gender: '',
                 breeds: { primary: '' },
-                organization_id: ''
+                organizations: { id: '', name: '' }
             });
         }
 

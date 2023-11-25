@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,23 +24,25 @@
         .animal {
             height: 280px;
             width: 380px;
-            padding: 20px 20px 0px 20px;
+            padding: 20px;
             background-color: #4B4755;
             text-align: center;
             border: 1px solid black;
+            margin-right: 20px;
         }
 
         .profileimg {
             width: 150px;
             height: 150px;
             border: 1px solid black;
-            border-radius: 100%;
+            border-radius: 50%;
             margin: 0 0 10% 0;
         }
 
         .stats {
             text-align: left;
-            font-size: .65em;
+            font-size: 0.65em;
+            color: white;
         }
 
         .container2 {
@@ -48,82 +51,102 @@
             gap: 2%;
         }
 
-        .gwc, .gwd, .gwk {
+        .gwc,
+        .gwd,
+        .gwk {
             border: 1px solid black;
             padding: 20px;
+        }
+
+        .organization {
+            height: 280px;
+            width: 380px;
+            padding: 20px;
+            background-color: #4B4755;
+            text-align: center;
+            border: 1px solid black;
+            margin-right: 20px;
+        }
+
+        .organizationimg {
+            width: 150px;
+            height: 150px;
+            border: 1px solid black;
+            border-radius: 50%;
+            margin: 0 0 10% 0;
         }
     </style>
 
 </head>
-<body>
-    
-<header>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="animals.html">Animals</a></li>
-        </ul>
-    </nav>
-</header>
 
-<div class="container">
-    <div class="animal">
-        <img id="animal1Img" src="Images/placeholder.png" class="profileimg">
-        <div class="stats">
-            <span id="animal1Name">name</span><br>
-            <span id="animal1Age">age</span><br>
-            <span id="animal1Gender">gender</span><br>
-            <span id="animal1Breed">breed</span><br>
-            <span id="animal1Organization">organization</span>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="animals.html">Animals</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="animal">
+            <img id="animal1Img" src="Images/placeholder.png" class="profileimg">
+            <div class="stats">
+                <span id="animal1Name">name</span><br>
+                <span id="animal1Age">age</span><br>
+                <span id="animal1Gender">gender</span><br>
+                <span id="animal1Breed">breed</span><br>
+                <span id="animal1Organization">organization</span>
+            </div>
+        </div>
+
+        <div class="animal">
+            <img id="animal2Img" src="Images/placeholder.png" class="profileimg">
+            <div class="stats">
+                <span id="animal2Name">name</span><br>
+                <span id="animal2Age">age</span><br>
+                <span id="animal2Gender">gender</span><br>
+                <span id="animal2Breed">breed</span><br>
+                <span id="animal2Organization">organization</span>
+            </div>
+        </div>
+
+        <div class="animal">
+            <img id="animal3Img" src="Images/placeholder.png" class="profileimg">
+            <div class="stats">
+                <span id="animal3Name">name</span><br>
+                <span id="animal3Age">age</span><br>
+                <span id="animal3Gender">gender</span><br>
+                <span id="animal3Breed">breed</span><br>
+                <span id="animal3Organization">organization</span>
+            </div>
         </div>
     </div>
 
-
-<div class="animal">
-    <img id="animal2Img" src="Images/placeholder.png" class="profileimg">
-    <div class="stats">
-        <span id="animal2Name">name</span><br>
-        <span id="animal2Age">age</span><br>
-        <span id="animal2Gender">gender</span><br>
-        <span id="animal2Breed">breed</span><br>
-        <span id="animal2Organization">organization</span>
+    <div class="search-input">
+        <form>
+            <input type="text" id="name" placeholder="Name">
+            <label for="age">Age:</label>
+            <select id="age">
+                <option value="Baby">Baby</option>
+                <option value="Young">Young</option>
+                <option value="Adult">Adult</option>
+                <option value="Senior">Senior</option>
+            </select>
+            <label for="gender">Gender:</label>
+            <select id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+            <input type="text" id="breed" placeholder="Breed">
+            <input type="text" id="organization" placeholder="Organization">
+            <button type="button" id="searchButton">Search</button>
+        </form>
     </div>
-</div>
 
-
-<div class="animal">
-    <img id="animal3Img" src="Images/placeholder.png" class="profileimg">
-    <div class="stats">
-        <span id="animal3Name">name</span><br>
-        <span id="animal3Age">age</span><br>
-        <span id="animal3Gender">gender</span><br>
-        <span id="animal3Breed">breed</span><br>
-        <span id="animal3Organization">organization</span>
-    </div>
-</div>
-</div>
-
-<div class="search-input">
-    <form>
-        <input type="text" id="name" placeholder="Name">
-        <label for="age">Age:</label>
-        <select id="age">
-            <option value="Baby">Baby</option>
-            <option value="Young">Young</option>
-            <option value="Adult">Adult</option>
-            <option value="Senior">Senior</option>
-        </select>
-        <label for="gender">Gender:</label>
-        <select id="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-        </select>
-        <input type="text" id="breed" placeholder="Breed">
-        <input type="text" id="organization" placeholder="Organization">
-        <button type="button" id="searchButton">Search</button>
-    </form>
-</div>
-
-<script src="animals.js"></script>
+    <script src="animals.js"></script>
 </body>
+
 </html>
