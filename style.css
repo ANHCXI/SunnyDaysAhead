@@ -3,11 +3,11 @@
 }
 
 html, body {
-background-color: #32272d;
-height: 100%;
-color: #d6dbd4;
-font-family: Arial, Helvetica, sans-serif;
-font-size: 1.1em;
+    background-image: url('images/metal_texture.png'); /* Background texture credited to https://www.deviantart.com/jojo-ojoj/ */
+    height: 100%;
+    color: #d6dbd4;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
 }
 
 main {
@@ -35,8 +35,8 @@ nav > ul > li {
 }
 
 nav a:visited, a:link {
-color: #d6dbd4;
-text-decoration: none;
+    color: #d6dbd4;
+    text-decoration: none;
 }
 
 nav a:hover {
