@@ -4,7 +4,6 @@
 Sunny Days Ahead is a website I designed as my Capstone Project to connect users with adoptable pets in their area using the Petfinder API. The website aims to provide a user-friendly interface for searching, viewing, and learning about available pets. You can search by name, age, gender, breed, and zipcode. After clicking search, three random animals will populate the slots and so will their information. Their names become a clickable link to their pages on Petfinder.
 
 ### Features
-Some are still being implemented, but they are as follows:
 
 1. Use arrays, objects, sets, or maps to store and retrieve information.
 2. Analyze data stored in arrays, objects, sets, or maps and display information.
