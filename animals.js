@@ -189,18 +189,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        function updateAnimalCompatibility(animalNumber, animalData) {
-            updateCompatibilityIcon(animalNumber + 'gwd', animalData.good_with_dogs);
-            updateCompatibilityIcon(animalNumber + 'gwc', animalData.good_with_cats);            
-        }
-
-        function updateCompatibilityIcon(animalData, isCompatible) {
-            var element = document.getElementById(animalData);
-            if (element) {
-                element.textContent = isCompatible ? '✓' : '✗';
-            }
-        }
-
         function clearAnimalContent(animalNumber) {
             updateAnimalImage(animalNumber + 'Img', '');
             updateAnimalText(animalNumber, {
