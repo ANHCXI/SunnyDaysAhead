@@ -17,4 +17,4 @@ Sunny Days Ahead is a website I designed as my Capstone Project to connect users
 
 1. Go here: https://www.petfinder.com/developers/v2/docs/
 2. Follow the instructions to create a Petfinder account.
-3. Next, you will go here to request an API Key/Secret Key: https://www.petfinder.com/developers/
+3. Next, you will go here to request an API Key/Secret Key: https://www.petfinder.com/developers/ and that's it, you have your keys.
