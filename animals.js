@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
-    require('dotenv').config();
-    var apiKey = process.env.YOUR_API_KEY;
-    var apiSecret = process.env.YOUR_SECRET_KEY;
+    var apiKey = 'Put API Key here.';
+    var apiSecret = 'Put Secret Key here.';
 
     function getAccessToken(apiKey, apiSecret) {
         var tokenUrl = 'https://api.petfinder.com/v2/oauth2/token';
