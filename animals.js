@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var apiKey = 'OEqraaP4K2Yy1cJb6Dwpaj8vH8JNA9J6vvr02z3pNLCTsvbzbX';
-    var apiSecret = 'dyofNYacLhn7wIRljelf4HuSsiHwPUsWuCKxuM8o';
+    require('dotenv').config();
+    var apiKey = process.env.YOUR_API_KEY;
+    var apiSecret = process.env.YOUR_SECRET_KEY;
 
     function getAccessToken(apiKey, apiSecret) {
         var tokenUrl = 'https://api.petfinder.com/v2/oauth2/token';
@@ -123,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     animalData.organization_name = organizationName;
                     updateAnimalImage(animalNumber + 'Img', animalData.photos[0].small);
                     updateAnimalText(animalNumber, animalData);
-                    updateAnimalCompatibility(animalNumber, animalData);
                 })
                 .catch(function (error) {
                     console.error('Error getting organization name:', error);
