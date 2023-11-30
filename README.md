@@ -13,4 +13,8 @@ Sunny Days Ahead is a website I designed as my Capstone Project to connect users
 6. Retrieve data from a third-party API and use it to display something within your app.
 
 
-#### In order to run, navigate over to srcServer.js. I use an extension called 'CodeRunner' on Visual Studio Code. Install the extension, rightclick and hit 'Run Code.' You may need to install node.js and NPM.
+#### In order to run, navigate over to srcServer.js. I use an extension called 'CodeRunner' on Visual Studio Code. Install the extension, rightclick and hit 'Run Code.' You may need to install node.js and NPM. You will need to get an API Key/Secret Key, which Petfinder has made simple.
+
+1. Go here: https://www.petfinder.com/developers/v2/docs/
+2. Follow the instructions to create a Petfinder account.
+3. Next, you will go here to request an API Key/Secret Key: https://www.petfinder.com/developers/
